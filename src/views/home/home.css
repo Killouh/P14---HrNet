@@ -1,0 +1,43 @@
+/* Header */
+.hero{
+    display: flex;
+    justify-content: center;
+}
+
+.home-title{
+    display: flex;
+    justify-content: center;
+}
+
+.home-link{
+    display: flex;
+    justify-content: center;
+}
+
+.home-subtitle{
+    display: flex;
+    justify-content: center;
+}
+
+/* Body */
+.employee-form{
+    display: flex;
+}
+
+#create-employee{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.address{
+    display: flex;
+    flex-direction: column;
+}
+
+.create-btn{
+    display: flex;
+    margin: auto;
+    margin-top: 25px;
+}
+
