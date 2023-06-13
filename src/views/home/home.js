@@ -10,8 +10,19 @@ import states from "../../data/data.json";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
+import Modal from '../../components/modal/modal';
 
 export default function Home() {
+// Modal package
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
 
 
@@ -71,8 +82,8 @@ export default function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Créer un objet pour représenter le nouvel employé
+    // Traduire les commentaires
+    // Créer un objet pour représenter le nouvel employé / voir avec state
     const newEmployee = {
       firstName: employeeData.firstName,
       lastName: employeeData.lastName,
@@ -245,9 +256,13 @@ export default function Home() {
             value={employeeData.department}
             onChange={handleSelectChange}
           />
-                <button type="submit" className="create-btn">
+                <button onClick={openModal} type="submit" className="create-btn">
         Save
       </button>
+      <Modal isOpen={modalOpen} onClose={closeModal}>
+        <h2>Contenu de la modal</h2>
+        <p>Ceci est le contenu de la modal.</p>
+      </Modal>
         </form>
       </section>
 
