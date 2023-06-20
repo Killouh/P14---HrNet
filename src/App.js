@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from 'react';
+import { EmployeeProvider } from './components/employeecontext/employeecontext';
 
 import Home from "./views/home/home";
 import EmployeesList from "./views/employeeslist/employeeslist";
@@ -8,6 +9,7 @@ import EmployeesList from "./views/employeeslist/employeeslist";
 function App() {
   return (
     <div id="App">
+      <EmployeeProvider> 
       <BrowserRouter>
         <main className="main-container">
           <Routes>
@@ -18,6 +20,7 @@ function App() {
           </Routes>
         </main>
       </BrowserRouter>
+      </EmployeeProvider>
     </div>
   );
 }

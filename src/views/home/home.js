@@ -1,38 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./home.css";
-import axios from "axios";
 import states from "../../data/data.json";
-
-
-
-// Mods :
+import { EmployeeContext } from "../../components/employeecontext/employeecontext";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
-import Modal from '../../components/modal/modal';
+import Modal from "../../components/modal/modal";
 
 export default function Home() {
-// Modal package
+  const { createEmployee } = useContext(EmployeeContext);
   const [modalOpen, setModalOpen] = useState(false);
-
-  const openModal = () => {
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
-
-
-  // Employee data creation :
   const [employeeData, setEmployeeData] = useState({
     firstName: "",
     lastName: "",
     dateOfBirth: "",
     startDate: "",
-    adress: {
+    address: {
       street: "",
       city: "",
       state: "",
@@ -43,13 +27,13 @@ export default function Home() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name.includes("adress.")) {
+    if (name.includes("address.")) {
       const addressField = name.split(".")[1];
 
       setEmployeeData((prevData) => ({
         ...prevData,
-        adress: {
-          ...prevData.adress,
+        address: {
+          ...prevData.address,
           [addressField]: value,
         },
       }));
@@ -62,13 +46,13 @@ export default function Home() {
   };
 
   const handleSelectChange = (selectedOption, { name }) => {
-    if (name.includes("adress.")) {
+    if (name.includes("address.")) {
       const addressField = name.split(".")[1];
 
       setEmployeeData((prevData) => ({
         ...prevData,
-        adress: {
-          ...prevData.adress,
+        address: {
+          ...prevData.address,
           [addressField]: selectedOption,
         },
       }));
@@ -82,44 +66,49 @@ export default function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Traduire les commentaires
-    // Créer un objet pour représenter le nouvel employé / voir avec state
+   
+    openModal();
     const newEmployee = {
       firstName: employeeData.firstName,
       lastName: employeeData.lastName,
       dateOfBirth: employeeData.dateOfBirth,
       startDate: employeeData.startDate,
-      adress: {
-        street: employeeData.adress.street,
-        city: employeeData.adress.city,
-        state: employeeData.adress.state,
-        zipCode: employeeData.adress.zipCode,
+      address: {
+        street: employeeData.address.street,
+        city: employeeData.address.city,
+        state: employeeData.address.state,
+        zipCode: employeeData.address.zipCode,
       },
       department: employeeData.department,
     };
-
-
-
-    // Effectuer une requête POST pour ajouter le nouvel employé à employees.json
-    axios
-      .post("data/employees.json", newEmployee)
-      .then((response) => {
-        // Gérer la réponse de la requête si nécessaire
-        console.log(response.data);
-      })
-      .catch((error) => {
-        // Gérer les erreurs si nécessaire
-        console.error(error);
-      });
+    createEmployee(newEmployee);
+    
   };
 
+  const handleRawBirthDateChange = (e) => {
+    const { value } = e.target;
+    setEmployeeData((prevState) => ({
+      ...prevState,
+      dateOfBirth: value,
+    }));
+  };
 
+  const handleRawStartDateChange = (e) => {
+    const { value } = e.target;
+    setEmployeeData((prevState) => ({
+      ...prevState,
+      startDate: value,
+    }));
+  };
 
-  // Datepicker state and settings
-  const [birthDate, setBirthDate] = useState(new Date());
-  const [startDate, setStartDate] = useState(new Date());
+  const openModal = () => {
+    setModalOpen(true);
+  };
 
-  // React-Select settings :
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   const options = [
     { value: "sales", label: "Sales" },
     { value: "marketing", label: "Marketing" },
@@ -129,26 +118,9 @@ export default function Home() {
   ];
 
   const data = states;
-  // React select custom label/value for the json
   const customOptionValue = (option) => option.abbreviation;
   const customOptionLabel = (option) => option.name;
 
-  const handleRawBirthDateChange = (e) => {
-    const { value } = e.target;
-    // Mettez à jour la valeur de la date de naissance dans l'état
-    setEmployeeData((prevState) => ({
-      ...prevState,
-      dateOfBirth: value,
-    }));
-  };
-  const handleRawStartDateChange = (e) => {
-    const { value } = e.target;
-    // Mettez à jour la valeur de la date de naissance dans l'état
-    setEmployeeData((prevState) => ({
-      ...prevState,
-      startDate: value,
-    }));
-  };
   return (
     <main>
       <div className="hero">
@@ -184,25 +156,33 @@ export default function Home() {
           <label htmlFor="dateOfBirth">Date of Birth</label>
           <DatePicker
             type="date"
-            selected={birthDate}
-            onChange={(date) => setBirthDate(date)}
+            selected={employeeData.dateOfBirth}
+            onChange={(date) =>
+              setEmployeeData((prevState) => ({
+                ...prevState,
+                dateOfBirth: date,
+              }))
+            }
             id="dateOfBirth"
             name="dateOfBirth"
-            value={employeeData.dateOfBirth}
             dateFormat="dd/MM/yyyy"
-            onChangeRaw={(e) => handleRawBirthDateChange(e)}
+            onChangeRaw={handleRawBirthDateChange}
           />
 
           <label htmlFor="startDate">Start Date</label>
           <DatePicker
             type="date"
-            selected={startDate}
-            onChange={(datee) => setStartDate(datee)}
+            selected={employeeData.startDate}
+            onChange={(date) =>
+              setEmployeeData((prevState) => ({
+                ...prevState,
+                startDate: date,
+              }))
+            }
             id="startDate"
             name="startDate"
-            value={employeeData.startDate}
             dateFormat="dd/MM/yyyy"
-            onChangeRaw={(e) => handleRawStartDateChange(e)}
+            onChangeRaw={handleRawStartDateChange}
           />
 
           <fieldset className="address">
@@ -212,8 +192,8 @@ export default function Home() {
             <input
               type="text"
               id="street"
-              name="adress.street"
-              value={employeeData.adress.street}
+              name="address.street"
+              value={employeeData.address.street}
               onChange={handleInputChange}
             />
 
@@ -221,8 +201,8 @@ export default function Home() {
             <input
               id="city"
               type="text"
-              name="adress.city"
-              value={employeeData.adress.city}
+              name="address.city"
+              value={employeeData.address.city}
               onChange={handleInputChange}
             />
 
@@ -232,8 +212,8 @@ export default function Home() {
               getOptionLabel={customOptionLabel}
               getOptionValue={customOptionValue}
               id="state"
-              name="adress.state"
-              value={employeeData.adress.state}
+              name="address.state"
+              value={employeeData.address.state}
               onChange={handleSelectChange}
             />
 
@@ -241,8 +221,8 @@ export default function Home() {
             <input
               id="zipCode"
               type="number"
-              name="adress.zipCode"
-              value={employeeData.adress.zipCode}
+              name="address.zipCode"
+              value={employeeData.address.zipCode}
               onChange={handleInputChange}
             />
           </fieldset>
@@ -256,16 +236,16 @@ export default function Home() {
             value={employeeData.department}
             onChange={handleSelectChange}
           />
-                <button onClick={openModal} type="submit" className="create-btn">
-        Save
-      </button>
-      <Modal isOpen={modalOpen} onClose={closeModal}>
-        <h2>Contenu de la modal</h2>
-        <p>Ceci est le contenu de la modal.</p>
-      </Modal>
-        </form>
-      </section>
 
+          <button type="submit" className="create-btn">
+            Save
+          </button>
+        </form>
+        <Modal isOpen={modalOpen} onClose={closeModal}>
+          <h2>Contenu de la modal</h2>
+          <p>Ceci est le contenu de la modal.</p>
+        </Modal>
+      </section>
     </main>
   );
 }
