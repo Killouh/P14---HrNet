@@ -12,14 +12,15 @@ const Modal = ({ isOpen, onClose, children }) => {
     };
   
     if (!isOpen) {
-      return null; // Si la modal n'est pas ouverte, ne rien rendre
+      return null;
     }
   
     return (
       <div className="modal">
+        
         <div className="modal-content">
-          <span className="close" onClick={closeModal}>
-            &times;
+        <span className="close" onClick={closeModal}>
+        <i className="fa-regular fa-circle-xmark close-icon"></i>
           </span>
           {children}
         </div>

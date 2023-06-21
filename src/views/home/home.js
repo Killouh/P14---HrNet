@@ -85,22 +85,6 @@ export default function Home() {
     
   };
 
-  const handleRawBirthDateChange = (e) => {
-    const { value } = e.target;
-    setEmployeeData((prevState) => ({
-      ...prevState,
-      dateOfBirth: value,
-    }));
-  };
-
-  const handleRawStartDateChange = (e) => {
-    const { value } = e.target;
-    setEmployeeData((prevState) => ({
-      ...prevState,
-      startDate: value,
-    }));
-  };
-
   const openModal = () => {
     setModalOpen(true);
   };
@@ -142,6 +126,7 @@ export default function Home() {
             name="firstName"
             value={employeeData.firstName}
             onChange={handleInputChange}
+            required
           />
 
           <label htmlFor="lastName">Last Name</label>
@@ -151,6 +136,7 @@ export default function Home() {
             name="lastName"
             value={employeeData.lastName}
             onChange={handleInputChange}
+            required
           />
 
           <label htmlFor="dateOfBirth">Date of Birth</label>
@@ -166,7 +152,7 @@ export default function Home() {
             id="dateOfBirth"
             name="dateOfBirth"
             dateFormat="dd/MM/yyyy"
-            onChangeRaw={handleRawBirthDateChange}
+            required
           />
 
           <label htmlFor="startDate">Start Date</label>
@@ -182,7 +168,7 @@ export default function Home() {
             id="startDate"
             name="startDate"
             dateFormat="dd/MM/yyyy"
-            onChangeRaw={handleRawStartDateChange}
+            required
           />
 
           <fieldset className="address">
@@ -195,6 +181,7 @@ export default function Home() {
               name="address.street"
               value={employeeData.address.street}
               onChange={handleInputChange}
+              required
             />
 
             <label htmlFor="city">City</label>
@@ -204,6 +191,7 @@ export default function Home() {
               name="address.city"
               value={employeeData.address.city}
               onChange={handleInputChange}
+              required
             />
 
             <label htmlFor="state">State</label>
@@ -215,6 +203,7 @@ export default function Home() {
               name="address.state"
               value={employeeData.address.state}
               onChange={handleSelectChange}
+              required
             />
 
             <label htmlFor="zip-code">Zip Code</label>
@@ -224,6 +213,7 @@ export default function Home() {
               name="address.zipCode"
               value={employeeData.address.zipCode}
               onChange={handleInputChange}
+              required
             />
           </fieldset>
 
@@ -235,6 +225,7 @@ export default function Home() {
             type="text"
             value={employeeData.department}
             onChange={handleSelectChange}
+             required
           />
 
           <button type="submit" className="create-btn">
@@ -242,8 +233,7 @@ export default function Home() {
           </button>
         </form>
         <Modal isOpen={modalOpen} onClose={closeModal}>
-          <h2>Contenu de la modal</h2>
-          <p>Ceci est le contenu de la modal.</p>
+          <p className="modal-text">Employee Created!</p>
         </Modal>
       </section>
     </main>

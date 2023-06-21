@@ -1,7 +1,8 @@
 # Plugins :
 react-datepicker
 react-select
-//axios
+own modal
+material core ui table
 
 
 
