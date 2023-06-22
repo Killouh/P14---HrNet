@@ -8,10 +8,26 @@ import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import Modal from "../../components/modal/modal";
 
+/**
+ * Provide a Form to register a new employee
+ * @param {html}, static html
+ * @param {form}
+ * @returns {JSX}
+ * Get the user information from each form fields when submitted
+ *
+ * @param {form} id New id
+ * @param {data[id: number, firstName: string, lastName: string, dateOfBirth: date, startDate: date, address: {street: string, city: string, state: string, zipCode: number,},department: string] }, submitted User's Array 
+ * @returns {form} to a database
+ */
+
+
 export default function Home() {
   const { createEmployee } = useContext(EmployeeContext);
   const [modalOpen, setModalOpen] = useState(false);
+  const [lastId, setLastId] = useState(0);
   const [employeeData, setEmployeeData] = useState({
+    
+    id:"",
     firstName: "",
     lastName: "",
     dateOfBirth: "",
@@ -25,6 +41,7 @@ export default function Home() {
     department: "",
   });
 
+  // Input listeners
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name.includes("address.")) {
@@ -64,11 +81,15 @@ export default function Home() {
     }
   };
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
+        const newId = lastId + 1;
+        setLastId(newId);
    
     openModal();
     const newEmployee = {
+      id:newId,
       firstName: employeeData.firstName,
       lastName: employeeData.lastName,
       dateOfBirth: employeeData.dateOfBirth,
@@ -85,6 +106,7 @@ export default function Home() {
     
   };
 
+  // Modal actions
   const openModal = () => {
     setModalOpen(true);
   };
@@ -93,6 +115,7 @@ export default function Home() {
     setModalOpen(false);
   };
 
+  // department choices
   const options = [
     { value: "sales", label: "Sales" },
     { value: "marketing", label: "Marketing" },
@@ -101,7 +124,7 @@ export default function Home() {
     { value: "legal", label: "Legal" },
   ];
 
-  const data = states;
+  const dataStates = states;
   const customOptionValue = (option) => option.abbreviation;
   const customOptionLabel = (option) => option.name;
 
@@ -196,7 +219,7 @@ export default function Home() {
 
             <label htmlFor="state">State</label>
             <Select
-              options={data}
+              options={dataStates}
               getOptionLabel={customOptionLabel}
               getOptionValue={customOptionValue}
               id="state"

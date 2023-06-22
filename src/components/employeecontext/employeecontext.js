@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 
+// Generate Employee array (Context)
+
 export const EmployeeContext = createContext();
 
 export const EmployeeProvider = ({ children }) => {

@@ -1,0 +1,18 @@
+.paginationtextfield-container{
+    padding-top: 20px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.textfield-container{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 25px;
+}
+
+.searchbar{
+    height: 10px;
+    display: flex;
+    margin-bottom: 50px;
+}
