@@ -152,7 +152,6 @@ export default function Home() {
       const newEmployee = {
         ...employeeTemplate,
         id: newId + i, // Utiliser newId + i pour générer des ID différents pour chaque employé
-        data: `data-${i + 1}`,
       };
       createEmployee(newEmployee);
     }
