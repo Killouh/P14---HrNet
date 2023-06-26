@@ -3,17 +3,13 @@ import { EmployeeContext } from "../../components/employeecontext/employeecontex
 import { Link } from "react-router-dom";
 import "./employeeslist.css";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  TextField,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from "@material-ui/core";
-import { TablePagination } from "@material-ui/core";
+import { TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import { Pagination } from '@mui/material';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+
+
 
 /**
  * Render a table that display employee with search and pagination
@@ -28,10 +24,13 @@ const useStyles = makeStyles({
   },
 });
 
+
+
 export default function EmployeesList() {
 
   const classes = useStyles();
   const { employeeData } = useContext(EmployeeContext);
+  console.log(employeeData);
 
   // Table data managing
   const formattedData = employeeData.map((employee) => ({
@@ -68,14 +67,19 @@ export default function EmployeesList() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+const totalPages = Math.ceil(displayedData.length / rowsPerPage);
+const currentPage = page + 1;
+
+const handlePageChange = (event, newPage) => {
+  setPage(newPage - 1);
+};
+
+const handleChangeRowsPerPage = (event) => {
+  setRowsPerPage(parseInt(event.target.value, 10));
+  setPage(0);
+};
+
 
   return (
     <main>
@@ -86,35 +90,41 @@ export default function EmployeesList() {
       </div>
 
       <TableContainer component={Paper} className="employee-table">
-        <div className="paginationtextfield-container">
-          <table className="pagination-container">
-            <tbody>
-              <tr>
-                <TablePagination
-                  rowsPerPageOptions={[10, 50]}
-                  colSpan={3}
-                  count={displayedData.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-              </tr>
-            </tbody>
-          </table>
+      <div className="paginationtextfield-container">
+      <div className="pagination-container">
+  <Pagination
+    count={totalPages || 1}
+    page={currentPage}
+    onChange={handlePageChange}
+    color="primary"
+    variant="outlined"
+    shape="rounded"
+  />
+  <InputLabel id="rows-per-page-label">Rows per page:</InputLabel>
+  <Select
+    labelId="rows-per-page-label"
+    id="rows-per-page"
+    value={rowsPerPage}
+    onChange={handleChangeRowsPerPage}
+  >
+    <MenuItem value={10}>10</MenuItem>
+    <MenuItem value={25}>25</MenuItem>
+    <MenuItem value={50}>50</MenuItem>
+  </Select>
+</div>
 
+  <div className="textfield-container">
+    <TextField
+      style={{ width: '200px', height: '10px', marginBottom: '50px' }}
+      className="searchbar"
+      label="Search"
+      variant="outlined"
+      value={searchTerm}
+      onChange={handleSearch}
+    />
+  </div>
+</div>
 
-        <div className="textfield-container">
-          <TextField
-            style={{ width: "200px", height: "10px", marginBottom: "50px" }}
-            className="searchbar"
-            label="Search"
-            variant="outlined"
-            value={searchTerm}
-            onChange={handleSearch}
-          />
-        </div>
-        </div>
 
         <Table className={classes.table} aria-label="Employee Table">
           <TableHead>

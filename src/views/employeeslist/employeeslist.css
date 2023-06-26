@@ -16,3 +16,7 @@
     display: flex;
     margin-bottom: 50px;
 }
+
+.MuiPagination-ul {
+    justify-content: center;
+  }

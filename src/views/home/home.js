@@ -22,9 +22,9 @@ import Modal from "../../components/modal/modal";
 
 
 export default function Home() {
-  const { createEmployee } = useContext(EmployeeContext);
+
   const [modalOpen, setModalOpen] = useState(false);
-  const [lastId, setLastId] = useState(0); // a voir bug qui reprend a  et ne compte plus
+  const { createEmployee, getMaxId } = useContext(EmployeeContext);
   const [employeeData, setEmployeeData] = useState({
     id:"",
     firstName: "",
@@ -79,11 +79,13 @@ export default function Home() {
       }));
     }
   };
-//verifier le compteur d'id , à mettre dans un state
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
-        const newId = lastId + 1;
-        setLastId(newId);
+    
+    const currentMaxId = getMaxId();
+    const newId = currentMaxId + 1;
    
     openModal();
     const newEmployee = {
@@ -103,6 +105,7 @@ export default function Home() {
     createEmployee(newEmployee);
     
   };
+
 
   // Modal actions
   const openModal = () => {
@@ -125,6 +128,36 @@ export default function Home() {
   const dataStates = states;
   const customOptionValue = (option) => option.abbreviation;
   const customOptionLabel = (option) => option.name;
+
+  // test 
+  const handleTestButtonClick = () => {
+
+    const employeeTemplate = {
+      firstName: employeeData.firstName,
+      lastName: employeeData.lastName,
+      dateOfBirth: employeeData.dateOfBirth,
+      startDate: employeeData.startDate,
+      address: {
+        street: employeeData.address.street,
+        city: employeeData.address.city,
+        state: employeeData.address.state,
+        zipCode: employeeData.address.zipCode,
+      },
+      department: employeeData.department,
+    };
+    const currentMaxId = getMaxId();
+    const newId = currentMaxId + 1;
+
+    for (let i = 0; i < 11; i++) {
+      const newEmployee = {
+        ...employeeTemplate,
+        id: newId + i, // Utiliser newId + i pour générer des ID différents pour chaque employé
+        data: `data-${i + 1}`,
+      };
+      createEmployee(newEmployee);
+    }
+  
+  };
 
   return (
     <main>
@@ -252,6 +285,9 @@ export default function Home() {
           <button type="submit" className="create-btn">
             Save
           </button>
+          <button type="button" onClick={handleTestButtonClick}>
+  Test
+</button>
         </form>
         <Modal 
         isOpen={modalOpen} 
