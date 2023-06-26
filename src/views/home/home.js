@@ -24,9 +24,8 @@ import Modal from "../../components/modal/modal";
 export default function Home() {
   const { createEmployee } = useContext(EmployeeContext);
   const [modalOpen, setModalOpen] = useState(false);
-  const [lastId, setLastId] = useState(0);
+  const [lastId, setLastId] = useState(0); // a voir bug qui reprend a  et ne compte plus
   const [employeeData, setEmployeeData] = useState({
-    
     id:"",
     firstName: "",
     lastName: "",
@@ -80,8 +79,7 @@ export default function Home() {
       }));
     }
   };
-
-
+//verifier le compteur d'id , à mettre dans un state
   const handleSubmit = (e) => {
     e.preventDefault();
         const newId = lastId + 1;
@@ -255,7 +253,9 @@ export default function Home() {
             Save
           </button>
         </form>
-        <Modal isOpen={modalOpen} onClose={closeModal}>
+        <Modal 
+        isOpen={modalOpen} 
+        onClose={closeModal}>
           <p className="modal-text">Employee Created!</p>
         </Modal>
       </section>

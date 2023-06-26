@@ -6,10 +6,10 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+    // voir pour fix avec strictmode
     <React.Fragment>
     <App />
     </React.Fragment>,
-
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -5,6 +5,7 @@ import './modal.css';
 // voir attribut/template de taille 
 // voir proposition avec modal header/title, footer
 // Voir les différents usages de modale 
+// voir pour ajouter classe dans la modale 
 
 const Modal = ({ isOpen, onClose, children }) => {
     const closeModal = () => {
@@ -17,7 +18,6 @@ const Modal = ({ isOpen, onClose, children }) => {
   
     return (
       <div className="modal">
-        
         <div className="modal-content">
         <span className="close" onClick={closeModal}>
         <i className="fa-regular fa-circle-xmark close-icon"></i>

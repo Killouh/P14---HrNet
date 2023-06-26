@@ -24,9 +24,8 @@
     right: 5px;
     display: flex;
     justify-content: flex-end;
-    cursor: pointer;
+    cursor: pointer; 
   }
-
   .close-icon{
     font-size: 20px;
   }
