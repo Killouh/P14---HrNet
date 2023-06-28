@@ -6,7 +6,7 @@ import { EmployeeContext } from "../../components/employeecontext/employeecontex
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
-import Modal from "../../components/modal/modal";
+import Modal from "modal-component";
 
 /**
  * Provide a Form to register a new employee
@@ -16,17 +16,15 @@ import Modal from "../../components/modal/modal";
  * Get the user information from each form fields when submitted
  *
  * @param {form} id New id
- * @param {data[id: number, firstName: string, lastName: string, dateOfBirth: date, startDate: date, address: {street: string, city: string, state: string, zipCode: number,},department: string] }, submitted User's Array 
+ * @param {data[id: number, firstName: string, lastName: string, dateOfBirth: date, startDate: date, address: {street: string, city: string, state: string, zipCode: number,},department: string] }, submitted User's Array
  * @returns {form} to a database
  */
 
-
 export default function Home() {
-
   const [modalOpen, setModalOpen] = useState(false);
   const { createEmployee, getMaxId } = useContext(EmployeeContext);
   const [employeeData, setEmployeeData] = useState({
-    id:"",
+    id: "",
     firstName: "",
     lastName: "",
     dateOfBirth: "",
@@ -80,16 +78,15 @@ export default function Home() {
     }
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const currentMaxId = getMaxId();
     const newId = currentMaxId + 1;
-   
+
     openModal();
     const newEmployee = {
-      id:newId,
+      id: newId,
       firstName: employeeData.firstName,
       lastName: employeeData.lastName,
       dateOfBirth: employeeData.dateOfBirth,
@@ -103,9 +100,7 @@ export default function Home() {
       department: employeeData.department,
     };
     createEmployee(newEmployee);
-    
   };
-
 
   // Modal actions
   const openModal = () => {
@@ -129,9 +124,8 @@ export default function Home() {
   const customOptionValue = (option) => option.abbreviation;
   const customOptionLabel = (option) => option.name;
 
-  // test 
+  // test
   const handleTestButtonClick = () => {
-
     const employeeTemplate = {
       firstName: employeeData.firstName,
       lastName: employeeData.lastName,
@@ -155,7 +149,6 @@ export default function Home() {
       };
       createEmployee(newEmployee);
     }
-  
   };
 
   return (
@@ -278,19 +271,23 @@ export default function Home() {
             type="text"
             value={employeeData.department}
             onChange={handleSelectChange}
-             required
+            required
           />
 
           <button type="submit" className="create-btn">
             Save
           </button>
           <button type="button" onClick={handleTestButtonClick}>
-  Test
-</button>
+            Test
+          </button>
         </form>
-        <Modal 
-        isOpen={modalOpen} 
-        onClose={closeModal}>
+        <Modal
+          modalClassName="modal"
+          contentClassName="modal-content"
+          closeClassName="close"
+          isOpen={modalOpen}
+          onClose={closeModal}
+        >
           <p className="modal-text">Employee Created!</p>
         </Modal>
       </section>

@@ -1,7 +1,7 @@
 # Plugins :
 react-datepicker
 react-select
-own modal
+own modal => Prop types necessaire
 material core ui table
 cra
 react router

@@ -1,37 +1,44 @@
-import PropTypes from 'prop-types';
-import './modal.css';
+import PropTypes from "prop-types";
+import "./modal.css";
 
 // voir quand le formulaire sera ok (voir si close avec submit)
-// voir attribut/template de taille 
+// voir attribut/template de taille
 // voir proposition avec modal header/title, footer
-// Voir les différents usages de modale 
-// voir pour ajouter classe dans la modale 
+// Voir les différents usages de modale
+// voir pour ajouter classe dans la modale
 
-const Modal = ({ isOpen, onClose, children }) => {
-    const closeModal = () => {
-      onClose();
-    };
-  
-    if (!isOpen) {
-      return null;
-    }
-  
-    return (
-      <div className="modal">
-        <div className="modal-content">
-        <span className="close" onClick={closeModal}>
-        <i className="fa-regular fa-circle-xmark close-icon"></i>
-          </span>
-          {children}
-        </div>
+// Mettre un svg dans la modale / dans le paquet NPM
+
+const Modal = ({ isOpen, onClose, children, modalClassName, contentClassName, closeClassName }) => {
+  const closeModal = () => {
+    onClose();
+  };
+
+  if (!isOpen) {
+    return null;
+  }
+
+  const modalClassNameConst = `modal ${modalClassName || ""}`;
+  const contentClassNameConst = `modal-content ${contentClassName || ""}`;
+  const closeClassNameeConst = `close ${closeClassName || ""}`;
+
+  return (
+    <div className={modalClassNameConst}>
+      <div className={contentClassNameConst}>
+        <span className={closeClassNameeConst} onClick={closeModal}> X </span>
+        {children}
       </div>
-    );
-  };
-  
-  Modal.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
-    children: PropTypes.node.isRequired,
-  };
-  
-  export default Modal;
+    </div>
+  );
+};
+
+Modal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  contentClassName: PropTypes.string,
+  closeClassName: PropTypes.string,
+};
+
+export default Modal;
