@@ -4,6 +4,13 @@ import { Link } from "react-router-dom";
 import "./employeeslist.css";
 import { Table, Pagination, Form, InputGroup } from "react-bootstrap";
 
+/**
+ * Provide a table to display context data registered from the index's form
+ * @param {data}, from index's form
+ * @returns {JSX}
+ * Render all the user and their informations with a table with pagination and search mangement
+ */
+
 export default function EmployeesList() {
   const { employeeData } = useContext(EmployeeContext);
   console.log(employeeData);

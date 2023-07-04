@@ -1,5 +1,12 @@
 import React, { createContext, useState, useEffect } from "react";
 
+/**
+ * Provide a context to save data through website pages
+ * @param {data}, from index's form
+ * @returns {Context}
+ * Store context data
+ */
+
 export const EmployeeContext = createContext();
 
 export function EmployeeProvider({ children }) {
