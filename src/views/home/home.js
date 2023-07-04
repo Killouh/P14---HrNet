@@ -6,6 +6,7 @@ import { EmployeeContext } from "../../components/employeecontext/employeecontex
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
+
 import Modal from "modal-component";
 
 /**
@@ -84,7 +85,6 @@ export default function Home() {
     const currentMaxId = getMaxId();
     const newId = currentMaxId + 1;
 
-    openModal();
     const newEmployee = {
       id: newId,
       firstName: employeeData.firstName,
@@ -100,6 +100,7 @@ export default function Home() {
       department: employeeData.department,
     };
     createEmployee(newEmployee);
+    openModal();
   };
 
   // Modal actions
@@ -282,11 +283,12 @@ export default function Home() {
           </button>
         </form>
         <Modal
-          modalClassName="modal"
-          contentClassName="modal-content"
-          closeClassName="close"
           isOpen={modalOpen}
           onClose={closeModal}
+          modalClassName="modale"
+          contentClassName="modal--content"
+          closeClassName="close"
+          visibleClassName="visible"
         >
           <p className="modal-text">Employee Created!</p>
         </Modal>

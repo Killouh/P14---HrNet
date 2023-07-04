@@ -1,3 +1,5 @@
+@import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
 .paginationtextfield-container{
     padding-top: 20px;
     display:flex;
@@ -16,7 +18,3 @@
     display: flex;
     margin-bottom: 50px;
 }
-
-.MuiPagination-ul {
-    justify-content: center;
-  }

@@ -9,7 +9,7 @@ import "./modal.css";
 
 // Mettre un svg dans la modale / dans le paquet NPM
 
-const Modal = ({ isOpen, onClose, children, modalClassName, contentClassName, closeClassName }) => {
+const Modal = ({ isOpen, onClose, children, modalClassName, contentClassName, closeClassName}) => {
   const closeModal = () => {
     onClose();
   };
@@ -18,9 +18,9 @@ const Modal = ({ isOpen, onClose, children, modalClassName, contentClassName, cl
     return null;
   }
 
-  const modalClassNameConst = `modal ${modalClassName || ""}`;
-  const contentClassNameConst = `modal-content ${contentClassName || ""}`;
-  const closeClassNameeConst = `close ${closeClassName || ""}`;
+  const modalClassNameConst = modalClassName;
+  const contentClassNameConst = contentClassName;
+  const closeClassNameeConst = closeClassName;
 
   return (
     <div className={modalClassNameConst}>
@@ -36,7 +36,7 @@ Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
-  className: PropTypes.string,
+  modalClassName: PropTypes.string,
   contentClassName: PropTypes.string,
   closeClassName: PropTypes.string,
 };

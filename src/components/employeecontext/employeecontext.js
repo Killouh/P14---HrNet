@@ -2,9 +2,8 @@ import React, { createContext, useState, useEffect } from "react";
 
 export const EmployeeContext = createContext();
 
-export const EmployeeProvider = ({ children }) => {
+export function EmployeeProvider({ children }) {
   const [employeeData, setEmployees] = useState([]);
-
 
   const createEmployee = (newEmployee) => {
     setEmployees((prevEmployees) => [...prevEmployees, newEmployee]);
@@ -21,13 +20,12 @@ export const EmployeeProvider = ({ children }) => {
   useEffect(() => {
     const maxId = getMaxId();
     console.log("Employee objects:", employeeData, maxId);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [employeeData]);
-
 
   return (
     <EmployeeContext.Provider value={{ employeeData, createEmployee, getMaxId }}>
       {children}
     </EmployeeContext.Provider>
   );
-};
+}
