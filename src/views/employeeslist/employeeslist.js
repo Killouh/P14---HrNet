@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { EmployeeContext } from "../../components/employeecontext/employeecontext";
 import { Link } from "react-router-dom";
 import "./employeeslist.css";
@@ -13,7 +13,6 @@ import { Table, Pagination, Form, InputGroup } from "react-bootstrap";
 
 export default function EmployeesList() {
   const { employeeData } = useContext(EmployeeContext);
-  console.log(employeeData);
 
   const formattedData = employeeData.map((employee) => ({
     ...employee,
@@ -26,9 +25,6 @@ export default function EmployeesList() {
     startDate: new Date(employee.startDate).toLocaleDateString("en-US"),
   }));
 
-  useEffect(() => {
-    console.log("Employee object:", formattedData);
-  }, [formattedData]);
 
   const [searchTerm, setSearchTerm] = useState("");
 
