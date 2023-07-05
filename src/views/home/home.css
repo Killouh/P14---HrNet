@@ -71,3 +71,7 @@
   cursor: pointer;
   font-weight: bolder;
 }
+
+.modal-text {
+  margin-top: 10px;
+}

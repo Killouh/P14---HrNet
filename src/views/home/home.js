@@ -7,7 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 
-import Modal from "modal-component";
+import Modal from "@killouh/modalpackage";
 
 /**
  * Provide a Form to register a new employee
@@ -288,7 +288,6 @@ export default function Home() {
           modalClassName="modale"
           contentClassName="modal--content"
           closeClassName="close"
-          visibleClassName="visible"
         >
           <p className="modal-text">Employee Created!</p>
         </Modal>
