@@ -23,14 +23,14 @@ This project was bootstrapped with [Create React App ](https://github.com/facebo
 - A terminal to run commands. If you don't have one, I would recommend to use Visual Studio Code, it provides an integrated terminal inside the code editor.
 
 # Installation :
-'''
+```
 git clone https://github.com/Killouh/P14---HrNet.git
 cd P14---HrNet
 npm install or npm i
-'''
+```
 
 # How to Run
-'''
+```
 npm run build
 npm install -g serve
 cd build
@@ -38,7 +38,7 @@ serve -s
 
 And go to this url :
 http://localhost:3000/
-'''
+```
 
 
 
