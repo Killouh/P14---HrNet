@@ -15,7 +15,7 @@ This project was bootstrapped with [Create React App ](https://github.com/facebo
 - [react-datepicker](https://www.npmjs.com/package/react-datepicker)
 - [react-select](https://www.npmjs.com/package/react-select)
 - [Bootstrap => Table usage](https://react-bootstrap.netlify.app)
-- [ModalBymyOwn] (https://www.npmjs.com/package/@killouh/modalpackage?activeTab=readme)
+- [Own Modal Package](https://www.npmjs.com/package/@killouh/modalpackage?activeTab=readme)
 
 # Prerequisites :
 - NodeJS
