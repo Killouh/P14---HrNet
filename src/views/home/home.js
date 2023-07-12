@@ -82,6 +82,7 @@ export default function Home() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Keep the track of assigned's IDs
     const currentMaxId = getMaxId();
     const newId = currentMaxId + 1;
 
@@ -169,7 +170,7 @@ export default function Home() {
           <label htmlFor="firstName">First Name</label>
           <input
             type="text"
-            id="first-name"
+            id="firstName"
             name="firstName"
             value={employeeData.firstName}
             onChange={handleInputChange}
@@ -217,7 +218,6 @@ export default function Home() {
             dateFormat="dd/MM/yyyy"
             required
           />
-
           <fieldset className="address">
             <legend>Address</legend>
 
@@ -240,31 +240,38 @@ export default function Home() {
               onChange={handleInputChange}
               required
             />
+            <div aria-label="State">
+              <label htmlFor="state" >State</label>
+              <div data-testid="statetest">
+              <Select
+                options={dataStates}
+                getOptionLabel={customOptionLabel}
+                getOptionValue={customOptionValue}
+                id="state"
+                type="text"
+                name="address.state"
+                value={employeeData.address.state}
+                onChange={handleSelectChange}
+                required
 
-            <label htmlFor="state">State</label>
-            <Select
-              options={dataStates}
-              getOptionLabel={customOptionLabel}
-              getOptionValue={customOptionValue}
-              id="state"
-              name="address.state"
-              value={employeeData.address.state}
-              onChange={handleSelectChange}
-              required
-            />
-
-            <label htmlFor="zip-code">Zip Code</label>
-            <input
-              id="zipCode"
-              type="number"
-              name="address.zipCode"
-              value={employeeData.address.zipCode}
-              onChange={handleInputChange}
-              required
-            />
+              />
+              </div>
+            </div>
+            <div className="ZipCode" aria-label="ZipCode">
+              <label htmlFor="zipCode">Zip Code</label>
+              <input
+                id="zipCode"
+                type="number"
+                name="address.zipCode"
+                value={employeeData.address.zipCode}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
           </fieldset>
-
-          <label htmlFor="department">Department</label>
+          <div aria-label="Department">
+          <label htmlFor="department" >Department</label>
+          <div data-testid="departmenttest">
           <Select
             options={options}
             id="department"
@@ -272,10 +279,13 @@ export default function Home() {
             type="text"
             value={employeeData.department}
             onChange={handleSelectChange}
+            
             required
           />
+          </div>
+          </div>
 
-          <button type="submit" className="create-btn">
+          <button type="submit" className="create-btn" data-testid="createBtn">
             Save
           </button>
           <button type="button" onClick={handleTestButtonClick}>

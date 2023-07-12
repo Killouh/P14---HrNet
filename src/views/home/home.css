@@ -38,6 +38,11 @@
   padding: 20px;
 }
 
+.ZipCode{
+  display: flex;
+  flex-direction: column;
+}
+
 .create-btn {
   display: flex;
   margin: auto;

@@ -26,16 +26,30 @@ export default function EmployeesList() {
   }));
 
 
+  // Search 
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
+    setPage(0);
   };
 
   const filteredData = formattedData.filter((employee) => {
     const fullName = `${employee.firstName} ${employee.lastName}`;
-    return fullName.toLowerCase().includes(searchTerm.toLowerCase());
+    const dateOfBirth = employee.dateOfBirth;
+    const startDate = employee.startDate;
+    const address = `${employee.street} ${employee.city} ${employee.stateAbbreviation} ${employee.zipCode}`;
+    const department = employee.department;
+
+    return (
+      fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      dateOfBirth.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      startDate.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      address.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      department.toLowerCase().includes(searchTerm.toLowerCase())
+    );
   });
+
 
   const displayedData = searchTerm ? filteredData : formattedData;
 
