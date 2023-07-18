@@ -126,32 +126,33 @@ export default function Home() {
   const customOptionValue = (option) => option.abbreviation;
   const customOptionLabel = (option) => option.name;
 
-  // test
-  const handleTestButtonClick = () => {
-    const employeeTemplate = {
-      firstName: employeeData.firstName,
-      lastName: employeeData.lastName,
-      dateOfBirth: employeeData.dateOfBirth,
-      startDate: employeeData.startDate,
-      address: {
-        street: employeeData.address.street,
-        city: employeeData.address.city,
-        state: employeeData.address.state,
-        zipCode: employeeData.address.zipCode,
-      },
-      department: employeeData.department,
-    };
-    const currentMaxId = getMaxId();
-    const newId = currentMaxId + 1;
+  // test that generate 11 entries by click
+  // const handleTestButtonClick = () => {
+  //   const employeeTemplate = {
+  //     firstName: employeeData.firstName,
+  //     lastName: employeeData.lastName,
+  //     dateOfBirth: employeeData.dateOfBirth,
+  //     startDate: employeeData.startDate,
+  //     address: {
+  //       street: employeeData.address.street,
+  //       city: employeeData.address.city,
+  //       state: employeeData.address.state,
+  //       zipCode: employeeData.address.zipCode,
+  //     },
+  //     department: employeeData.department,
+  //   };
+  //   const currentMaxId = getMaxId();
+  //   const newId = currentMaxId + 1;
 
-    for (let i = 0; i < 11; i++) {
-      const newEmployee = {
-        ...employeeTemplate,
-        id: newId + i, // Utiliser newId + i pour générer des ID différents pour chaque employé
-      };
-      createEmployee(newEmployee);
-    }
-  };
+  //   for (let i = 0; i < 11; i++) {
+  //     const newEmployee = {
+  //       ...employeeTemplate,
+  //       id: newId + i, // Utiliser newId + i pour générer des ID différents pour chaque employé
+  //     };
+  //     createEmployee(newEmployee);
+  //   }
+  // };
+
 
   return (
     <main>
@@ -288,9 +289,9 @@ export default function Home() {
           <button type="submit" className="create-btn" data-testid="createBtn">
             Save
           </button>
-          <button type="button" onClick={handleTestButtonClick}>
+          {/* test button x11 entries <button type="button" onClick={handleTestButtonClick}>
             Test
-          </button>
+          </button> */}
         </form>
         <Modal
           isOpen={modalOpen}

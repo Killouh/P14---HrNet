@@ -35,4 +35,36 @@
     margin-bottom: 50px;
 }
 
+.ant-spin-container{
+    display: flex;
+    flex-direction: column-reverse;
+    position: relative;
+    z-index: 2;
+}
+
+.ant-input-wrapper {
+    position: absolute;
+    top: 7%; 
+    left: 100; 
+    width: 30%;
+    margin-right: 50px;
+    z-index: 3;
+  }
+.ant-pagination{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.ant-table-wrapper .ant-table-pagination-right{
+    justify-content: flex-start;
+    width: 60%;
+    padding-left: 10px;
+}
+
+.ant-input-group-wrapper{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
 
